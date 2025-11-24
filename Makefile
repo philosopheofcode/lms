@@ -1,4 +1,4 @@
-.PHONY: up down logs shell
+.PHONY: up down logs shell test stan cs-fix precommit
 
 up:
 	docker build -t lsm-slim-app .
@@ -14,3 +14,18 @@ logs:
 
 shell:
 	docker exec -it lsm-slim-app-container bash
+
+test:
+	docker run --rm -v $(PWD):/app lsm-slim-app vendor/bin/phpunit
+
+stan:
+	docker run --rm -v $(PWD):/app lsm-slim-app vendor/bin/phpstan analyse src tests
+
+cs-fix:
+	docker run --rm -v $(PWD):/app lsm-slim-app vendor/bin/php-cs-fixer fix src --rules=@PSR12
+	docker run --rm -v $(PWD):/app lsm-slim-app vendor/bin/php-cs-fixer fix tests --rules=@PSR12
+
+precommit:
+	$(MAKE) cs-fix
+	$(MAKE) stan
+	$(MAKE) test

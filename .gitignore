@@ -4,12 +4,22 @@ composer.phar
 
 # PHPUnit
 .phpunit.result.cache
+.phpunit.cache/
 /test-reports/
 /coverage/
+
+# PHPStan
+.phpstan.cache
+
+# PHP-CS-Fixer
+.php-cs-fixer.cache
 
 # Environment variables
 .env
 .env.local
+
+#LLM
+.junie/
 
 # IDEs
 .idea/
