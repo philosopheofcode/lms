@@ -122,15 +122,8 @@ final class Course
      */
     public function addPreparationMaterial(PreparationMaterial $material): self
     {
-        return new self(
-            $this->id,
-            $this->name,
-            $this->startDate,
-            $this->endDate,
-            $this->lessons,
-            $this->homeworks,
-            $this->preparationMaterials->add($material)
-        );
+        $this->preparationMaterials = $this->preparationMaterials->add($material);
+        return $this;
     }
 
     private function ensureEndDateIsAfterStartDate(\DateTimeImmutable $startDate, ?\DateTimeImmutable $endDate): void

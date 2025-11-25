@@ -407,10 +407,10 @@ final class CourseTest extends TestCase
             $materials
         );
 
-        $newCourse = $course->addPreparationMaterial($material2);
+        $returnedCourse = $course->addPreparationMaterial($material2);
 
-        $this->assertNotSame($course, $newCourse);
-        $this->assertCount(1, $course->preparationMaterials());
-        $this->assertCount(2, $newCourse->preparationMaterials());
+        $this->assertSame($course, $returnedCourse);
+        $this->assertCount(2, $course->preparationMaterials());
+        $this->assertCount(2, $returnedCourse->preparationMaterials());
     }
 }
