@@ -36,4 +36,33 @@ final class Homeworks implements \IteratorAggregate, \Countable
     {
         return count($this->items);
     }
+
+    /**
+     * Find homework by name
+     */
+    public function findByName(HomeworkName $name): ?Homework
+    {
+        foreach ($this->items as $homework) {
+            if ($homework->name()->value() === $name->value()) {
+                return $homework;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if homework exists
+     */
+    public function contains(HomeworkName $name): bool
+    {
+        return $this->findByName($name) !== null;
+    }
+
+    /**
+     * Add a new homework
+     */
+    public function add(Homework $homework): self
+    {
+        return new self(...[...$this->items, $homework]);
+    }
 }

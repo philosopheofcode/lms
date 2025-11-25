@@ -6,11 +6,15 @@ namespace Lms\Courses\Domain;
 
 final class Homework
 {
-    public function __construct(
-        public readonly string $name
-    ) {
-        if (trim($name) === '') {
-            throw new \InvalidArgumentException('Homework name cannot be empty.');
-        }
+    private HomeworkName $name;
+
+    public function __construct(HomeworkName $name)
+    {
+        $this->name = $name;
+    }
+
+    public function name(): HomeworkName
+    {
+        return $this->name;
     }
 }

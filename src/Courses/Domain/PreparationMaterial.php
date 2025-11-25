@@ -6,11 +6,15 @@ namespace Lms\Courses\Domain;
 
 final class PreparationMaterial
 {
-    public function __construct(
-        public readonly string $name
-    ) {
-        if (trim($name) === '') {
-            throw new \InvalidArgumentException('Preparation material name cannot be empty.');
-        }
+    private MaterialName $name;
+
+    public function __construct(MaterialName $name)
+    {
+        $this->name = $name;
+    }
+
+    public function name(): MaterialName
+    {
+        return $this->name;
     }
 }
